@@ -96,6 +96,8 @@ func mergeAdjacent(pfxs []*net.IPNet) []*net.IPNet {
 	return pfxs
 }
 
+// IPNets takes a slice of CIDR prefixes and aggregates the prefixes to the smallest possible set of prefixes that
+// covers the exact same set of addresses.
 func IPNets(pfxs []*net.IPNet) ([]*net.IPNet, error) {
 	contained, err := removeContained(pfxs)
 	if err != nil {
@@ -104,6 +106,7 @@ func IPNets(pfxs []*net.IPNet) ([]*net.IPNet, error) {
 	return mergeAdjacent(contained), nil
 }
 
+// Strings is a convenience function that accepts a slice of CIDR prefix strings instead of net.IPNet structs.
 func Strings(pfxs []string) ([]string, error) {
 	ipNets := make([]*net.IPNet, 0, len(pfxs))
 	for _, pfx := range pfxs {
