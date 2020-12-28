@@ -178,6 +178,7 @@ func benchmarkIPNets(l int, b *testing.B) {
 	}
 
 	b.ResetTimer()
+	b.ReportAllocs()
 	for n := 0; n < b.N; n++ {
 		if _, err := IPNets(pfxs); err != nil {
 			b.Fatal(err)
